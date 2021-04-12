@@ -14,7 +14,7 @@ const bot = new TeleBot(config.token);
 const relay = (msg) => {
   console.log('Received from' + ' @' + msg.from.username, 'with id', msg.from.id);
 
-  if (config.masters.empty() || config.masters.includes(msg.from.id)) {
+  if (!config.masters || config.masters.includes(msg.from.id)) {
     console.log('Replying');
 
     return config.receivers.map(id => bot.sendMessage(id, msg.text)
